@@ -20,7 +20,7 @@ namespace MySortProject {
 				for(let i =0;i<DataArray.length;i++){
 					this.add_back(DataArray[i]);
 				}
-				console.log("Создан class List, получив на вход массив");
+				console.log("Создан class List, получив на вход тестовый массив");
 				console.log("Размер: "+this.length);
 			}else{
 				console.log("Создан class List");
@@ -135,38 +135,61 @@ namespace MySortProject {
 	}
 
 	class General {
-		tempArray: number[] =[];
-		StaticTempArray: number[] =[];
+		tempArray: number[] =[]; // Просто рандомный массив
+		dataArrayForSort:List;
+		sortStrategy : ISortStrategy;
 		
-		createSortDataRandomShuffleArray(x): void {
+		constructor(strategy:ISortStrategy ) {
+			this.sortStrategy = strategy;	
+		}
+		createDataRandomShuffleArray(x): void {
 			while(x){
 			  this.tempArray.push(x);
 			  x--;
 			}
 			this.tempArray=this.tempArray.sort(() => Math.random() - 0.5);
-		console.log("Создан тестовый массив: "+this.tempArray);
+		console.log("Создан тестовый массив");
 		}
 
-		createStaticRandomShuffleArray(x):void {
-			for(let i = 0; i < x; i++){
-				console.log(x); //Поправить на какую-нибудь формулу
+		createList(): void {
+			if(this.tempArray.length){
+				this.dataArrayForSort = new List(this.tempArray);
 			}
 		}
 
-		createList(size?:number): void {
-
+		setSortStrategy(strategy:ISortStrategy):void{
+			this.sortStrategy = strategy;
 		}
 
+		startSort(){
+			this.sortStrategy.algorithm(); // запустим алгоритм
+		}
+		print(): void{
+			this.dataArrayForSort.print();
+		}
 	}
+
+	interface ISortStrategy {
+		algorithm():void;
+	}
+
+	class Sort1 implements ISortStrategy {
+		algorithm(){
+			console.log("Алгоритм чего-то делает, затвра напишу. наверное");
+		}
+	}
+
 	function start(): void {
-		let gen = new General();
-		gen.createSortDataRandomShuffleArray(10); // генератор и перемешивание рандомного
-		let bigData = new List(gen.tempArray); //Лист с массивом
-		// let bigData1 = new List(); //Пустой лист
+		let generalObject = new General(new Sort1); 		// кинем в конструктор тип сортировки, или поменяем в  setStrategy...
+		generalObject.createDataRandomShuffleArray(100);	// генератор и перемешивание рандомного
+		generalObject.createList();							// Создаст структуру, на основе сгенерированного массива, надо добавить проверку или совместить создание с генерацией
+		generalObject.startSort();							// Старт сортировки на основе выбранного класса
+		generalObject.print();								// чето-там в консоль
 	}
 
 	console.clear();
-	start();
+	start(); 												// запуск
 }
-
-
+//TO Do Сортировки с использованием методов List 
+// Раскидать по отдельным файлам.
+//Для временного хранения простой массив. или "стек"
