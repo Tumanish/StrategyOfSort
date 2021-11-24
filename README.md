@@ -1,0 +1,2 @@
+# StrategyOfSort
+Other sort
