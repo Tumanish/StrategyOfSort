@@ -20,11 +20,9 @@ namespace MySortProject {
 				for(let i =0;i<DataArray.length;i++){
 					this.add_back(DataArray[i]);
 				}
-				console.log("Создан class List, получив на вход тестовый массив");
-				console.log("Размер: "+this.length);
+				console.log("Создан class List, получив на вход тестовый массив"+"Размер: "+this.length);
 			}else{
-				console.log("Создан class List");
-				console.log("Размер: "+this.length);
+				console.log("Создан class List"+ "Размер: "+this.length);
 			}
 		}
 		add_front(data: number): void {
@@ -76,7 +74,8 @@ namespace MySortProject {
 		remove_front(): void {
 			switch(this.length) { 
 				case 1: { 
-				   this.clearList();
+					this.head = this.tail = null;
+					this.length--;
 					break; 
 				} 
 				case 0: { 
@@ -84,6 +83,7 @@ namespace MySortProject {
 				   break; 
 				} 
 				default: { 
+					this.head.next.prev=null;
 					this.head = this.head.next;
 					this.length--;
 					break; 
@@ -94,7 +94,8 @@ namespace MySortProject {
 		remove_back(): void {
 			switch(this.length) {
 				case 1: {
-					this.clearList();
+					this.head = this.tail = null;
+					this.length--;
 					break;
 				}
 				case 0: {
@@ -102,22 +103,25 @@ namespace MySortProject {
 					break;
 				}
 				default: {
+					this.tail.prev.next=null;
 					this.tail = this.tail.prev;
 					this.length--;
 					break;
 				}
 			}
 		};
-		get_front() : Node {
-			return this.head;
+		get_front() : number {
+			return this.head.data;
 		};
-		get_back() : Node {
-			return this.tail;
+		get_back() : number {
+			return this.tail.data;
 		};
 		clearList() :void {
-			this.head = null;
-			this.tail = null;
-			console.log("Все данные удалены из List");
+			while(this.length){
+
+				console.log("Удаляетя элемент с головы : "+ this.get_front() + " Размер List = "+ this.length );
+				this.remove_front();
+			}
 		};
 		getLength() : Number {
 			return this.length;
@@ -142,27 +146,24 @@ namespace MySortProject {
 		constructor(strategy:ISortStrategy ) {
 			this.sortStrategy = strategy;	
 		}
-		createDataRandomShuffleArray(x): void {
+		createDataRandomShuffleArray(x:number): void {
 			while(x){
 			  this.tempArray.push(x);
 			  x--;
 			}
 			this.tempArray=this.tempArray.sort(() => Math.random() - 0.5);
-		console.log("Создан тестовый массив");
+		// console.log("Создан тестовый массив");
 		}
-
 		createList(): void {
 			if(this.tempArray.length){
 				this.dataArrayForSort = new List(this.tempArray);
 			}
 		}
-
 		setSortStrategy(strategy:ISortStrategy):void{
 			this.sortStrategy = strategy;
 		}
-
 		startSort(){
-			this.sortStrategy.algorithm(); // запустим алгоритм
+			this.sortStrategy.algorithm(this.dataArrayForSort);  // запустим алгоритм
 		}
 		print(): void{
 			this.dataArrayForSort.print();
@@ -170,18 +171,65 @@ namespace MySortProject {
 	}
 
 	interface ISortStrategy {
-		algorithm():void;
+		dataList:List;
+		tempArray:number[];
+		algorithm(DataList:List):void;
+		getDataElementByIndex(index):number;
+		repalceElement(index1,index2):void;
 	}
 
-	class Sort1 implements ISortStrategy {
-		algorithm(){
+	class BubbleSort implements ISortStrategy {
+		
+		/* From c++ :
+		void BubbleSort(vector<int>& values) {
+			for (size_t idx_i = 0; idx_i + 1 < values.size(); ++idx_i) {
+				for (size_t idx_j = 0; idx_j + 1 < values.size() - idx_i; ++idx_j) {
+					if (values[idx_j + 1] < values[idx_j]) {
+						swap(values[idx_j], values[idx_j + 1]);
+					}
+				}
+ 			}
+		}
+		//методы:
+		-запустить алгоритм сортировки
+		-Взять по номеру относительно length
+		-Поменять местами
+		*/
+		
+		//Сюда пишем алгоритм, новые поля и методы которые будут использоваться если надо.
+		tempArray:number[] = [];
+		dataList: List;
+		
+		algorithm(_dataList:List){
+				this.dataList = _dataList;
+				this.dataList.clearList();
+				// //test
+			// for(let i = this.dataList.length; i > 0; i--){
+			// 	console.log("Элемент номер "+ this.dataList.length + " "+ this.dataList.get_front());
+			// 	this.dataList.remove_front();
+			// }
 			console.log("Алгоритм чего-то делает, затвра напишу. наверное");
+		}
+		getDataElementByIndex(index: any): number { //пока не работает
+			this.dataList.length;
+			let res = 0;
+			for(let i = 1; i<=index;i++){
+				console.log("this.dataList.length"+this.dataList.length);
+				console.log(i);
+			}
+			for(let i =0;i<index;i++){
+				this.dataList.add_front(this.tempArray.pop());
+			}
+			return res;
+		}
+		repalceElement(index1: any, index2: any): void { //пока не работает
+			throw new Error("Method not implemented.");
 		}
 	}
 
 	function start(): void {
-		let generalObject = new General(new Sort1); 		// кинем в конструктор тип сортировки, или поменяем в  setStrategy...
-		generalObject.createDataRandomShuffleArray(100);	// генератор и перемешивание рандомного
+		let generalObject = new General(new BubbleSort()); 		// кинем в конструктор тип сортировки, или поменяем в  setStrategy...
+		generalObject.createDataRandomShuffleArray(10);		// генератор и перемешивание рандомного
 		generalObject.createList();							// Создаст структуру, на основе сгенерированного массива, надо добавить проверку или совместить создание с генерацией
 		generalObject.startSort();							// Старт сортировки на основе выбранного класса
 		generalObject.print();								// чето-там в консоль
