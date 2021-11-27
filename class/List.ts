@@ -135,4 +135,50 @@ export 	class List {
 	print () : void {
 		console.log("Размер массива: " , this.length);
 	};
+	getDataElementByIndex(index: any): number {
+		let res = 0;
+		let tempArray = [];
+		//to do разобрать до i
+		for(let i = 1; i<=index+1;i++){
+			if(i==index){
+				res = this.get_front();
+			}else{
+			tempArray.push(this.get_front());	// пушим головной эллемент
+			this.remove_front();					// Удаляем готовной элемент
+			}
+		}
+		
+		//to do Собрать обратно до i
+		for(let i =1;i<=index;i++){
+			this.add_front(tempArray.pop());
+		}
+		return res;
+	}
+	repalceElement(index1: any, index2: any): void {
+		let data1:number;
+		let data2:number;
+		//сохраняем оригинал
+		data1 = this.getDataElementByIndex(index1);
+		data2 = this.getDataElementByIndex(index2);
+		//меняем местами
+		this.setElementByIndex(index1,data2);
+		this.setElementByIndex(index2,data1);
+	}
+	setElementByIndex(index:number,newData:number){
+		let tempArray = [];
+		//разобрать лист до элемента и поменять на новый
+		for(let i = 1; i<=index;i++){
+			if(i==index){
+				this.remove_front();
+			}else{
+			tempArray.push(this.get_front());	// пушим головной эллемент
+			this.remove_front();					// Удаляем готовной элемент
+			}
+		}
+		//собрать обратно
+		this.add_front(newData);
+		for(let i = 1; i < index; i++){
+			this.add_front(tempArray.pop());
+		}
+	}
 }

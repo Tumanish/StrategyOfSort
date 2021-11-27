@@ -15,7 +15,6 @@ export 	class General {
 		  x--;
 		}
 		this.tempArray=this.tempArray.sort(() => Math.random() - 0.5);
-	// console.log("Создан тестовый массив");
 	}
 	createList(): void {
 		if(this.tempArray.length){
@@ -26,7 +25,18 @@ export 	class General {
 		this.sortStrategy = strategy;
 	}
 	startSort(){
+
+		//timer
+		console.log("start");
+		console.log(new Date()); 
+		let start  = new Date().getSeconds();
+
 		this.sortStrategy.algorithm(this.dataArrayForSort);  // запустим алгоритм
+
+		//timer
+		let fin = new Date().getSeconds();
+		console.log(new Date());
+		console.log("finish ", fin - start," sec");
 	}
 	print(): void{
 		console.log(" ");
