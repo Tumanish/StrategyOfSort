@@ -1,28 +1,58 @@
-import { SelectionSort } from "./ClassOfSort/SelectionSort";
-import { BubbleSort } from "./ClassOfSort/BubbleSort"; // TO DO добавить массив названий в general и тула заимпортить
-
 import { General } from "./class/General";
-import {InsertSort} from "./ClassOfSort/InsertSort";
 
-
+import { SelectionSort } from "./ClassOfSort/SelectionSort";
+import { BubbleSort } from "./ClassOfSort/BubbleSort"; // TO DO добавить массив названий сортировок ( и в интерфейс строку с названием сортировки) в general и тула заимпортить
+import { InsertSort } from "./ClassOfSort/InsertSort";
 
 function start(size: number): void {
-	// Select type of sort
-	let generalObject = new General(new SelectionSort());
-	// let generalObject = new General(new InsertSort());
-	// let generalObject = new General(new BubbleSort());	// кинем в конструктор тип сортировки, или поменяем в  методе setStrategy...
+
+	let generalObject = new General(new SelectionSort()); 	// Select type of sort
 	
-	// generalObject.setSortStrategy(new BubbleSort())
-	generalObject.createDataRandomShuffleArray(size);		// генератор и перемешивание рандомного
-	generalObject.createList();								// Создаст структуру, на основе сгенерированного массива, надо добавить проверку или совместить создание с генерацией
+	// let generalObject = new General(new InsertSort());
+	// let generalObject = new General(new BubbleSort());	
+	// generalObject.setSortStrategy(new BubbleSort());		//  or set sort 
+
+	generalObject.createDataRandomShuffleArray(size);		// random  start Array // можно запихнуть в конструктор и добавить сортировку по умолчанию
+
+	generalObject.createList();								//Create new List by start Array
 	generalObject.print();
+	generalObject.setSortStrategy(new SelectionSort());
 	generalObject.startSort();								// Start
 	generalObject.print();
+	generalObject.dataArrayForSort.clearList();
+
+	console.log(" ");
+	console.log(" *** ");
+	console.log(" ");
+
+	generalObject.createList();	
+	generalObject.print();
+	generalObject.setSortStrategy(new BubbleSort());
+	generalObject.startSort();
+	generalObject.print();
+	generalObject.dataArrayForSort.clearList();
+
+	console.log(" ");
+	console.log(" *** ");
+	console.log(" ");
+
+	generalObject.createList();	
+	generalObject.print();
+	generalObject.setSortStrategy(new InsertSort());
+	generalObject.startSort();
+	generalObject.print();
+	generalObject.dataArrayForSort.clearList();
+
+	
+	console.log(" ");
+	console.log(" *** ");
+	console.log(" ");
 }
 	console.clear();
-	start(100); 												// запуск
+	start(1000); 												// запуск
 
 // TO Do Сортировки с использованием методов List
-// Для временного хранения простой массив. или "стек"
+// названи сортировок, убрать консол логи и оставить одну строку для проверки
 
+// Уваковать всю дич в класс General
 

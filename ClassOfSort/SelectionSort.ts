@@ -2,13 +2,14 @@ import { List } from "../class/List";
 import { ISortStrategy } from "../interface/ISortStrategy";
 
 export 	class SelectionSort implements ISortStrategy {
+	
 	dataList:List;
+	name: string = "Selection Sort";
 
 	algorithm(_dataList:List){
 		this.dataList = _dataList;
 		const length  = _dataList.getLength();
-		console.log("set Selection Sort");
-
+		
 		for (let i = 1; i <length ; i++){
 			let min = this.findMinElement(i,length);
 			this.dataList.repalceElement(i,min);

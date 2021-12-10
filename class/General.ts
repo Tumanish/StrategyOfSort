@@ -27,22 +27,19 @@ export 	class General {
 	startSort(){
 
 		//timer
-		console.log("start");
-		console.log(new Date());
-		let start  = new Date().getSeconds();
-
+		console.log("start",new Date(),"set ", this.sortStrategy.name);
+		let start  = Date.now();
+		
 		this.sortStrategy.algorithm(this.dataArrayForSort);  // запустим алгоритм
-
+		
 		//timer
-		let fin = new Date().getSeconds();
-		console.log(new Date());
-		console.log("finish ", fin - start," sec");
+		let fin = Date.now();
+		console.log("finish ", new Date());
+		console.log( "SORT TIME : ",(fin - start)/1000," sec");
 	}
 	print(): void{
-		console.log(" ");
-		console.log("Head : ",this.dataArrayForSort.get_front());
-		console.log("Tail : ",this.dataArrayForSort.get_back());
-		console.log("Length = ", this.dataArrayForSort.getLength());
-		console.log(" ");
+		console.log("--- >>> Head : ",this.dataArrayForSort.get_front());
+		console.log("--- >>> Tail : ",this.dataArrayForSort.get_back());
+		console.log("--- >>> Length = ", this.dataArrayForSort.getLength());
 	}
 }

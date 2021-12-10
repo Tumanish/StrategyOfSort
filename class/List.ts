@@ -10,9 +10,9 @@ export 	class List {
 			for(let i =0;i<DataArray.length;i++){
 				this.add_back(DataArray[i]);
 			}
-			console.log("Создан class List, получив на вход тестовый массив"+"Размер: "+this.length);
+			console.log("Создан class List, получив на вход тестовый массив ","Размер: ",this.length);
 		}else{
-			console.log("Создан class List"+ "Размер: "+this.length);
+			console.log("Создан List: "+this.length);
 		}
 	}
 	add_front(data: number): void {
@@ -117,9 +117,10 @@ export 	class List {
 	clearList() :void {
 		while(this.length){
 
-			console.log("Удаляетя элемент с головы : "+ this.get_front() + " Размер List = "+ this.length );
+			//console.log("Удаляетя элемент с головы : "+ this.get_front() + " Размер List = "+ this.length );
 			this.remove_front();
 		}
+		console.log("List is Clear ");
 	};
 	getLength() : number {
 		return this.length;

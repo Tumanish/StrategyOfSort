@@ -1,8 +1,11 @@
-import {ISortStrategy} from "../interface/ISortStrategy";
-import {List} from "../class/List";
+import { List } from "../class/List";
+import { ISortStrategy } from "../interface/ISortStrategy";
 
 export class InsertSort implements ISortStrategy{
+
     dataList: List;
+    name:string = "Insert Sort";
+	
     algorithm(_datalist: List) {
         this.dataList = _datalist;
         const size = this.dataList.getLength();
