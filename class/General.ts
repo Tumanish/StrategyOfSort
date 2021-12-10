@@ -3,11 +3,11 @@ import { ISortStrategy } from "../interface/ISortStrategy";
 
 export 	class General {
 	tempArray: number[] =[]; // Просто рандомный массив
-	dataArrayForSort:List;
-	sortStrategy : ISortStrategy;
-	
+	dataArrayForSort: List;
+	sortStrategy: ISortStrategy;
+
 	constructor(strategy:ISortStrategy ) {
-		this.sortStrategy = strategy;	
+		this.sortStrategy = strategy;
 	}
 	createDataRandomShuffleArray(x:number): void {
 		while(x){
@@ -21,14 +21,14 @@ export 	class General {
 			this.dataArrayForSort = new List(this.tempArray);
 		}
 	}
-	setSortStrategy(strategy:ISortStrategy):void{
+	setSortStrategy(strategy:ISortStrategy): void{
 		this.sortStrategy = strategy;
 	}
 	startSort(){
 
 		//timer
 		console.log("start");
-		console.log(new Date()); 
+		console.log(new Date());
 		let start  = new Date().getSeconds();
 
 		this.sortStrategy.algorithm(this.dataArrayForSort);  // запустим алгоритм

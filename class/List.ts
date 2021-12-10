@@ -16,70 +16,70 @@ export 	class List {
 		}
 	}
 	add_front(data: number): void {
-		switch(this.length) { 
+		switch(this.length) {
 			case 0: {
-				this.head = this.tail = new Node(data); 
+				this.head = this.tail = new Node(data);
 				this.length++;
-				break; 
-			} 
-			case 1: { 
+				break;
+			}
+			case 1: {
 				this.tail.prev = new Node(data);
 				this.tail.prev.next = this.tail;
 				this.head = this.tail.prev;
 				this.length++;
-				break; 
-			} 
+				break;
+			}
 			default: {
 				this.head.prev = new Node(data);
 				this.head.prev.next = this.head;
-				this.head = this.head.prev; 
+				this.head = this.head.prev;
 				this.length++;
-				break; 
-			} 
-		 } 
+				break;
+			}
+		 }
 	};
 	add_back(data: number):void {
-		switch(this.length) { 
+		switch(this.length) {
 			case 0: {
-				this.head = this.tail = new Node(data); 
+				this.head = this.tail = new Node(data);
 				this.length++;
-				break; 
-			} 
-			case 1: { 
+				break;
+			}
+			case 1: {
 				this.head.next = new Node(data);
 				this.head.next.prev = this.head;
 				this.tail = this.head.next;
 				this.length++;
-				break; 
-			} 
+				break;
+			}
 			default: {
 				this.tail.next = new Node(data);
 				this.tail.next.prev = this.tail;
-				this.tail = this.tail.next; 
+				this.tail = this.tail.next;
 				this.length++;
-				break; 
-			} 
-		 }  
+				break;
+			}
+		 }
 	};
 	remove_front(): void {
-		switch(this.length) { 
-			case 1: { 
+		switch(this.length) {
+			case 1: {
 				this.head = this.tail = null;
 				this.length--;
-				break; 
-			} 
-			case 0: { 
-			   console.log("List пустой, операция не удалась!"); 
-			   break; 
-			} 
-			default: { 
+				break;
+			}
+			case 0: {
+			   console.log("List пустой, операция не удалась!");
+			   break;
+			}
+			default: {
 				this.head.next.prev=null;
 				this.head = this.head.next;
 				this.length--;
-				break; 
-			} 
-		 } 
-		
+				break;
+			}
+		 }
+
 	};
 	remove_back(): void {
 		switch(this.length) {
@@ -121,10 +121,10 @@ export 	class List {
 			this.remove_front();
 		}
 	};
-	getLength() : Number {
+	getLength() : number {
 		return this.length;
 	};
-	isEmpty() : Boolean {
+	isEmpty() : boolean {
 		if(this.length) {
 			return false;
 		}else{
@@ -147,7 +147,7 @@ export 	class List {
 			this.remove_front();					// Удаляем готовной элемент
 			}
 		}
-		
+
 		//to do Собрать обратно до i
 		for(let i =1;i<=index;i++){
 			this.add_front(tempArray.pop());
