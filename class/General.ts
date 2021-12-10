@@ -5,9 +5,9 @@ export 	class General {
 	tempArray: number[] =[]; // Просто рандомный массив
 	dataArrayForSort:List;
 	sortStrategy : ISortStrategy;
-	
+
 	constructor(strategy:ISortStrategy ) {
-		this.sortStrategy = strategy;	
+		this.sortStrategy = strategy;
 	}
 	createDataRandomShuffleArray(x:number): void {
 		while(x){
@@ -17,6 +17,7 @@ export 	class General {
 		this.tempArray=this.tempArray.sort(() => Math.random() - 0.5);
 	}
 	createList(): void {
+		console.log('this.tempArray', this.tempArray);
 		if(this.tempArray.length){
 			this.dataArrayForSort = new List(this.tempArray);
 		}
@@ -28,7 +29,7 @@ export 	class General {
 
 		//timer
 		console.log("start");
-		console.log(new Date()); 
+		console.log(new Date());
 		let start  = new Date().getSeconds();
 
 		this.sortStrategy.algorithm(this.dataArrayForSort);  // запустим алгоритм
