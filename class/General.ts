@@ -3,8 +3,8 @@ import { ISortStrategy } from "../interface/ISortStrategy";
 
 export 	class General {
 	tempArray: number[] =[]; // Просто рандомный массив
-	dataArrayForSort:List;
-	sortStrategy : ISortStrategy;
+	dataArrayForSort: List;
+	sortStrategy: ISortStrategy;
 
 	constructor(strategy:ISortStrategy ) {
 		this.sortStrategy = strategy;
@@ -17,12 +17,11 @@ export 	class General {
 		this.tempArray=this.tempArray.sort(() => Math.random() - 0.5);
 	}
 	createList(): void {
-		console.log('this.tempArray', this.tempArray);
 		if(this.tempArray.length){
 			this.dataArrayForSort = new List(this.tempArray);
 		}
 	}
-	setSortStrategy(strategy:ISortStrategy):void{
+	setSortStrategy(strategy:ISortStrategy): void{
 		this.sortStrategy = strategy;
 	}
 	startSort(){

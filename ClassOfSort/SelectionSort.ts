@@ -1,9 +1,9 @@
 import { List } from "../class/List";
 import { ISortStrategy } from "../interface/ISortStrategy";
 
-export 	class SelectionSort implements ISortStrategy{
+export 	class SelectionSort implements ISortStrategy {
 	dataList:List;
-	
+
 	algorithm(_dataList:List){
 		this.dataList = _dataList;
 		const length  = _dataList.getLength();
